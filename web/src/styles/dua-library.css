@@ -399,3 +399,33 @@
     transition-duration: 0ms;
   }
 }
+
+.dua-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-lg);
+}
+
+.dua-filter {
+  background: var(--color-paper-raised);
+  border: var(--rule-1) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  color: var(--color-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--text-sm);
+  min-block-size: 2.75rem;
+  padding-inline: var(--space-md);
+}
+
+.dua-filter[aria-pressed="true"] {
+  background: var(--color-help-surface);
+  border-color: currentcolor;
+  color: var(--color-accent-ink);
+  font-weight: 600;
+}
+
+.dua-filter:active {
+  transform: translateY(1px);
+}

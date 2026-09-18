@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-import { listActiveDua, parseAudience } from "../../../src/api/dua.js";
+import { listActiveChapters } from "../../../src/api/dua.js";
 import { requestId } from "../../../src/api/request.js";
 import { getDatabase } from "../../../src/db/client.js";
 import { AppError, describeError, toErrorResponse } from "../../../src/lib/errors.js";
@@ -12,10 +12,10 @@ export default async function handler(request: VercelRequest, response: VercelRe
     if (request.method !== "GET") {
       throw new AppError(405, "METHOD_NOT_ALLOWED", "Only GET is allowed.");
     }
-    response.status(200).json(await listActiveDua(getDatabase(), { audience: parseAudience(request.query.audience) }));
+    response.status(200).json(await listActiveChapters(getDatabase()));
   } catch (error) {
     const formatted = toErrorResponse(error, id);
-    logger.error("dua_list_failed", { requestId: id, statusCode: formatted.statusCode, error: describeError(error) });
+    logger.error("dua_chapters_failed", { requestId: id, statusCode: formatted.statusCode, error: describeError(error) });
     response.status(formatted.statusCode).json(formatted.body);
   }
 }

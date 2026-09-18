@@ -3,7 +3,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { checkHealth } from "../../src/api/health.js";
 import { requestId } from "../../src/api/request.js";
 import { getDatabase } from "../../src/db/client.js";
-import { AppError, toErrorResponse } from "../../src/lib/errors.js";
+import { AppError, describeError, toErrorResponse } from "../../src/lib/errors.js";
 import { logger } from "../../src/lib/logger.js";
 
 export default async function handler(request: VercelRequest, response: VercelResponse): Promise<void> {
@@ -21,7 +21,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
     response.status(result.statusCode).json(result.body);
   } catch (error) {
     const formatted = toErrorResponse(error, id);
-    logger.error("health_check_failed", { requestId: id, statusCode: formatted.statusCode });
+    logger.error("health_check_failed", { requestId: id, statusCode: formatted.statusCode, error: describeError(error) });
     response.status(formatted.statusCode).json(formatted.body);
   }
 }

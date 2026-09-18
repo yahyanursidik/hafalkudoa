@@ -23,7 +23,11 @@
     "doa:review": "node --env-file=.env.local --import tsx scripts/doa.ts review",
     "doa:approve": "node --env-file=.env.local --import tsx scripts/doa.ts approve",
     "doa:activate": "node --env-file=.env.local --import tsx scripts/doa.ts activate",
-    "doa:publish-all": "node --env-file=.env.local --import tsx scripts/doa.ts publish-all"
+    "doa:publish-all": "node --env-file=.env.local --import tsx scripts/doa.ts publish-all",
+    "doa:curate": "node --env-file=.env.local --import tsx scripts/curate.ts plan",
+    "doa:curate-apply": "node --env-file=.env.local --import tsx scripts/curate.ts apply",
+    "doa:chunks": "node --env-file=.env.local --import tsx scripts/curate.ts chunks",
+    "doa:curation-report": "node --env-file=.env.local --import tsx scripts/curate.ts report"
   },
   "dependencies": {
     "@neon/config": "^1.7.2",

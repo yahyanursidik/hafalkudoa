@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { duaPageCount, fetchActiveDuaList, paginateDua, type PublicDuaListItem } from "../content/dua-api.js";
+import { duaPageCount, fetchActiveDuaList, paginateDua, type DuaAudience, type PublicDuaListItem } from "../content/dua-api.js";
 import { LearningIcon } from "./learning-icon.js";
 import "../styles/dua-library.css";
 
@@ -9,13 +9,26 @@ type CatalogState =
   | { readonly status: "ready"; readonly items: PublicDuaListItem[] }
   | { readonly status: "error" };
 
+type AudienceFilter = DuaAudience | "ALL";
+
+const audienceFilters: { readonly value: AudienceFilter; readonly label: string }[] = [
+  { value: "KIDS", label: "Untuk anak" },
+  { value: "FAMILY", label: "Bersama orang tua" },
+  { value: "ALL", label: "Semua doa" },
+];
+
+const difficultyLabels = ["", "Mudah", "Sedang", "Panjang"];
+
 export function DuaCatalogPage() {
   const [state, setState] = useState<CatalogState>({ status: "loading" });
   const [page, setPage] = useState(0);
+  const [audience, setAudience] = useState<AudienceFilter>("KIDS");
 
   useEffect(() => {
     let current = true;
-    void fetchActiveDuaList()
+    setState({ status: "loading" });
+    setPage(0);
+    void fetchActiveDuaList(audience)
       .then((items) => {
         if (current) {
           setState({ status: "ready", items });
@@ -29,17 +42,41 @@ export function DuaCatalogPage() {
     return () => {
       current = false;
     };
-  }, []);
+  }, [audience]);
+
+  const filters = (
+    <nav aria-label="Pilih kelompok doa" className="dua-filters">
+      {audienceFilters.map((filter) => (
+        <button
+          aria-pressed={audience === filter.value}
+          className="dua-filter"
+          key={filter.value}
+          onClick={() => setAudience(filter.value)}
+          type="button"
+        >
+          {filter.label}
+        </button>
+      ))}
+    </nav>
+  );
 
   if (state.status === "loading") {
-    return <p className="dua-status" role="status">Sebentar, doa sedang disiapkan…</p>;
+    return (
+      <section className="dua-library">
+        {filters}
+        <p className="dua-status" role="status">Sebentar, doa sedang disiapkan…</p>
+      </section>
+    );
   }
 
   if (state.status === "error") {
     return (
-      <section className="dua-status" aria-labelledby="dua-load-error">
-        <h1 id="dua-load-error">Daftar doa belum bisa dibuka.</h1>
-        <p>Coba lagi saat koneksi internet sudah siap.</p>
+      <section className="dua-library">
+        {filters}
+        <div className="dua-status">
+          <h1>Daftar doa belum bisa dibuka.</h1>
+          <p>Coba lagi saat koneksi internet sudah siap.</p>
+        </div>
       </section>
     );
   }
@@ -55,13 +92,21 @@ export function DuaCatalogPage() {
         <p>Ada {state.items.length} doa. Setiap doa punya Arab, Latin, arti, dan sumber.</p>
       </header>
 
+      {filters}
+
       <ol className="dua-list" start={page * 12 + 1}>
         {visibleItems.map((dua) => (
           <li key={dua.id}>
             <Link to={`/doa/${dua.id}`}>
               <span>
                 <strong>{dua.title}</strong>
-                {dua.group && <small>{dua.group}</small>}
+                {dua.curation ? (
+                  <small>
+                    {dua.curation.chapter} · {difficultyLabels[dua.curation.difficulty]}
+                  </small>
+                ) : (
+                  dua.group && <small>{dua.group}</small>
+                )}
               </span>
               <span className="dua-list-action"><span>Baca</span><LearningIcon name="arrowRight" /></span>
             </Link>

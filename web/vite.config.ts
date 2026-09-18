@@ -10,18 +10,33 @@ function localApiPlugin(): Plugin {
       server.middlewares.use(async (request, response, next) => {
         const requestUrl = new URL(request.url ?? "/", "http://localhost");
         const path = requestUrl.pathname;
-        const match = path.match(/^\/api\/v1\/dua(?:\/([^/]+))?$/);
-        if (!match) {
+        if (!path.startsWith("/api/")) {
           next();
           return;
         }
 
-        const handlerFile = match[1] ? "api/v1/dua/[id].ts" : "api/v1/dua/index.ts";
+        const staticRoutes: Record<string, string> = {
+          "/api/v1/health": "api/v1/health.ts",
+          "/api/v1/dua": "api/v1/dua/index.ts",
+          "/api/v1/dua/groups": "api/v1/dua/groups.ts",
+          "/api/v1/dua/tags": "api/v1/dua/tags.ts",
+          "/api/v1/dua/chapters": "api/v1/dua/chapters.ts",
+        };
+        const staticHandler = staticRoutes[path.replace(/\/$/, "")];
+        const match = staticHandler ? null : path.match(/^\/api\/v1\/dua\/([^/]+)$/);
+        if (!staticHandler && !match) {
+          response.statusCode = 404;
+          response.setHeader("Content-Type", "application/json; charset=utf-8");
+          response.end(JSON.stringify({ error: { code: "NOT_FOUND", message: "Unknown API route.", requestId: "local" } }));
+          return;
+        }
+
+        const handlerFile: string = staticHandler ?? "api/v1/dua/[id].ts";
         const handlerModule = await server.ssrLoadModule(resolve(process.cwd(), handlerFile));
         const localRequest = Object.assign(request, {
           query: {
             ...Object.fromEntries(requestUrl.searchParams),
-            ...(match[1] ? { id: decodeURIComponent(match[1]) } : {}),
+            ...(match ? { id: decodeURIComponent(match[1] ?? "") } : {}),
           },
         });
         const localResponse = Object.assign(response, {

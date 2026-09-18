@@ -47,3 +47,10 @@ export function toErrorResponse(error: unknown, requestId: string): {
     },
   };
 }
+
+const connectionSecretPattern = /(postgres(?:ql)?:\/\/)[^\s"']*/gi;
+
+export function describeError(error: unknown): string {
+  const message = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+  return message.replace(connectionSecretPattern, "$1[REDACTED]");
+}
