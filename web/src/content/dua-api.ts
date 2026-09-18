@@ -42,10 +42,17 @@ export const publicDuaDetailSchema = publicDuaListItemSchema.extend({
   chunks: z.array(duaChunkSchema).default([]),
 });
 
+export const duaBundleSchema = z.object({
+  generatedAt: z.string(),
+  chapters: z.array(duaChapterSchema),
+  items: z.array(publicDuaDetailSchema),
+});
+
 export type PublicDuaListItem = z.infer<typeof publicDuaListItemSchema>;
 export type PublicDuaDetail = z.infer<typeof publicDuaDetailSchema>;
 export type DuaChapter = z.infer<typeof duaChapterSchema>;
 export type DuaChunk = z.infer<typeof duaChunkSchema>;
+export type DuaBundle = z.infer<typeof duaBundleSchema>;
 
 export const duaPageSize = 12;
 
@@ -57,26 +64,49 @@ export function duaPageCount(itemCount: number): number {
   return Math.max(1, Math.ceil(itemCount / duaPageSize));
 }
 
-async function fetchJson(url: string, fetcher: typeof fetch): Promise<unknown> {
-  const response = await fetcher(url);
-  if (!response.ok) {
-    throw new Error("Daftar doa belum dapat dimuat.");
-  }
-  return response.json();
+/**
+ * The catalogue ships with the app as a static file. Reading it needs no
+ * database and no upstream API, so the doa still open when either is down.
+ */
+export const duaBundleUrl = "/content/dua.json";
+
+let bundleRequest: Promise<DuaBundle> | undefined;
+
+export function resetDuaBundleCache(): void {
+  bundleRequest = undefined;
+}
+
+export async function loadDuaBundle(fetcher: typeof fetch = fetch): Promise<DuaBundle> {
+  bundleRequest ??= (async () => {
+    const response = await fetcher(duaBundleUrl);
+    if (!response.ok) {
+      throw new Error("Daftar doa belum dapat dimuat.");
+    }
+    return duaBundleSchema.parse(await response.json());
+  })().catch((error: unknown) => {
+    bundleRequest = undefined;
+    throw error;
+  });
+
+  return bundleRequest;
 }
 
 export async function fetchActiveDuaList(
   audience: DuaAudience | "ALL" = "ALL",
   fetcher: typeof fetch = fetch,
 ): Promise<PublicDuaListItem[]> {
-  const query = audience === "ALL" ? "" : `?audience=${audience}`;
-  return z.array(publicDuaListItemSchema).parse(await fetchJson(`/api/v1/dua${query}`, fetcher));
+  const { items } = await loadDuaBundle(fetcher);
+  return audience === "ALL" ? items : items.filter((item) => item.curation?.audience === audience);
 }
 
 export async function fetchDuaChapters(fetcher: typeof fetch = fetch): Promise<DuaChapter[]> {
-  return z.array(duaChapterSchema).parse(await fetchJson("/api/v1/dua/chapters", fetcher));
+  return (await loadDuaBundle(fetcher)).chapters;
 }
 
 export async function fetchActiveDuaDetail(id: string, fetcher: typeof fetch = fetch): Promise<PublicDuaDetail> {
-  return publicDuaDetailSchema.parse(await fetchJson(`/api/v1/dua/${encodeURIComponent(id)}`, fetcher));
+  const detail = (await loadDuaBundle(fetcher)).items.find((item) => item.id === id);
+  if (!detail) {
+    throw new Error("Doa tidak ditemukan.");
+  }
+  return detail;
 }

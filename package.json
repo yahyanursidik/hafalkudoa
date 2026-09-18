@@ -27,7 +27,8 @@
     "doa:curate": "node --env-file=.env.local --import tsx scripts/curate.ts plan",
     "doa:curate-apply": "node --env-file=.env.local --import tsx scripts/curate.ts apply",
     "doa:chunks": "node --env-file=.env.local --import tsx scripts/curate.ts chunks",
-    "doa:curation-report": "node --env-file=.env.local --import tsx scripts/curate.ts report"
+    "doa:curation-report": "node --env-file=.env.local --import tsx scripts/curate.ts report",
+    "doa:export": "node --env-file=.env.local --import tsx scripts/export-bundle.ts"
   },
   "dependencies": {
     "@neon/config": "^1.7.2",

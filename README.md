@@ -117,3 +117,27 @@ has `.env.local`:
 ```
 npm run db:migrate
 ```
+
+## Static catalogue bundle (no runtime dependency)
+
+The browser does not call an API to read doa. `web/public/content/dua.json`
+ships with the app and holds the whole curated catalogue — Arabic, Latin,
+translation, source, tags, curation, and memorisation chunks — so the doa open
+even when Neon or the serverless functions are down. eQuran is only ever
+contacted by `doa:sync`, never by the browser.
+
+- `npm run doa:export` regenerates the bundle from the reviewed ACTIVE rows
+- the bundle is committed, so content changes show up as a reviewable git diff
+- the Vercel build does not regenerate it and needs no database access
+
+Re-run the export after any content change:
+
+```
+npm run doa:sync   # optional, only when pulling upstream changes
+npm run doa:curate-apply
+npm run doa:chunks
+npm run doa:export
+```
+
+The read API under `/api/v1/*` stays available and still reads Neon. It is no
+longer on the critical path for rendering the catalogue.
