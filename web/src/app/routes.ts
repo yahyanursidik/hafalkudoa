@@ -26,9 +26,9 @@ export const appRoutes: readonly AppRoute[] = [
   {
     key: "review",
     path: "/murajaah",
-    label: "Murajaah",
-    title: "Murajaah",
-    summary: "Ruang pengulangan akan hadir pada tahap berikutnya.",
+    label: "Ulangi",
+    title: "Ulangi doa",
+    summary: "Pilih doa yang sudah pernah dibaca untuk diulang.",
   },
   {
     key: "dua",
@@ -40,9 +40,9 @@ export const appRoutes: readonly AppRoute[] = [
   {
     key: "profile",
     path: "/saya",
-    label: "Saya",
-    title: "Saya",
-    summary: "Pengaturan belajar akan hadir pada tahap berikutnya.",
+    label: "Aku",
+    title: "Aku",
+    summary: "Atur cara belajar yang paling nyaman.",
   },
 ];
 

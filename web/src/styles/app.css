@@ -1,4 +1,4 @@
-/* Hallmark · macrostructure: Narrative Workflow · genre: playful · theme: studied-DNA (source: user reference images) · enrichment: none · nav: product bottom-navigation · footer: none · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+/* Hallmark · macrostructure: Ecosystem Index · genre: playful · theme: studied-DNA (source: user reference images) · enrichment: none · nav: task bottom-navigation · footer: none · pre-emit critique: P5 H5 E5 S5 R5 V5 */
 @import "./tokens.css";
 
 html,
@@ -24,6 +24,17 @@ a {
 
 button {
   font: inherit;
+}
+
+.learning-icon {
+  block-size: 1.25rem;
+  fill: none;
+  flex: 0 0 auto;
+  inline-size: 1.25rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
 }
 
 button:disabled {

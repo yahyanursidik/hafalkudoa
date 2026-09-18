@@ -30,7 +30,7 @@ export function AppShell() {
           <NavLink className="wordmark" to="/" aria-label="Hafalku Doa, kembali ke beranda">
             <Brand />
           </NavLink>
-          <p className="shell-context">Belajar hari ini</p>
+          <p className="shell-context">Hari ini</p>
         </header>
 
         <main className="app-main" id="main-content" tabIndex={-1}>

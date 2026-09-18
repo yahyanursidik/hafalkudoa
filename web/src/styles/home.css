@@ -1,4 +1,4 @@
-/* Hallmark · macrostructure: Narrative Workflow · genre: playful · theme: studied-DNA (source: user reference images) · enrichment: none · nav: product bottom-navigation · footer: none · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+/* Hallmark · macrostructure: Ecosystem Index · genre: playful · theme: studied-DNA (source: user reference images) · enrichment: none · nav: task bottom-navigation · footer: none · pre-emit critique: P5 H5 E5 S5 R5 V5 */
 
 .home-path {
   display: grid;
@@ -76,6 +76,12 @@
   white-space: nowrap;
 }
 
+.home-hero-link .learning-icon,
+.feature-card a .learning-icon {
+  block-size: 1.1rem;
+  inline-size: 1.1rem;
+}
+
 .home-hero-link {
   background: var(--color-accent);
   border: var(--rule-1) solid var(--color-accent);
@@ -124,6 +130,26 @@
   margin: 0;
 }
 
+.feature-card-copy {
+  display: grid;
+  gap: var(--space-2xs);
+  min-inline-size: 0;
+}
+
+.feature-card-copy .feature-card-icon {
+  align-items: center;
+  background: var(--color-paper-raised);
+  border: var(--rule-1) solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent-ink);
+  display: inline-flex;
+  justify-content: center;
+  margin-block-end: var(--space-xs);
+  min-block-size: 2.5rem;
+  min-inline-size: 2.5rem;
+  width: fit-content;
+}
+
 .feature-card p,
 .feature-card span {
   color: var(--color-accent-ink);
@@ -160,7 +186,8 @@
   border-radius: var(--radius-lg);
   color: var(--color-ink);
   display: grid;
-  min-block-size: 10rem;
+  grid-template-rows: auto auto 1fr auto;
+  min-block-size: 11.5rem;
   padding: var(--space-lg);
   position: relative;
   text-decoration: none;
@@ -174,6 +201,20 @@
   font-size: var(--text-sm);
 }
 
+.starter-card .starter-card-icon {
+  align-items: center;
+  background: var(--color-paper-raised);
+  border: var(--rule-1) solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent-ink);
+  display: inline-flex;
+  justify-content: center;
+  margin-block-end: var(--space-sm);
+  min-block-size: 2.5rem;
+  min-inline-size: 2.5rem;
+  width: fit-content;
+}
+
 .starter-card strong {
   align-self: center;
   font-family: var(--font-sans);
@@ -184,10 +225,10 @@
   max-inline-size: 8ch;
 }
 
-.starter-card i {
+.starter-card-arrow {
   align-self: end;
-  font-size: var(--text-lg);
-  font-style: normal;
+  block-size: 1.5rem;
+  inline-size: 1.5rem;
   justify-self: end;
 }
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchActiveDuaDetail, type PublicDuaDetail } from "../content/dua-api.js";
 import { useLearningFocus } from "./learning-focus.js";
+import { LearningIcon, type LearningIconName } from "./learning-icon.js";
 import "../styles/dua-library.css";
 
 type DetailState =
@@ -46,15 +47,15 @@ export function DuaDetailPage() {
   useEffect(() => () => setFocusMode(false), [setFocusMode]);
 
   if (state.status === "loading") {
-    return <p className="dua-status" role="status">Memuat doa…</p>;
+    return <p className="dua-status" role="status">Sebentar, doa sedang dibuka…</p>;
   }
 
   if (state.status === "error") {
     return (
       <section className="dua-status" aria-labelledby="dua-detail-error">
-        <h1 id="dua-detail-error">Doa belum dapat ditampilkan.</h1>
-        <p>Doa hanya dapat dipelajari bila Arab, Latin, arti, dan sumbernya lengkap.</p>
-        <Link className="back-link" to="/doa">Lihat koleksi doa</Link>
+        <h1 id="dua-detail-error">Doa belum bisa ditampilkan.</h1>
+        <p>Doa hanya dapat dibuka bila Arab, Latin, arti, dan sumbernya lengkap.</p>
+        <Link className="back-link" to="/doa"><LearningIcon name="arrowLeft" />Lihat daftar doa</Link>
       </section>
     );
   }
@@ -70,7 +71,7 @@ export function DuaDetailPage() {
   return (
     <article className="dua-detail" aria-labelledby="dua-detail-title">
       <div className="reader-topline">
-        <Link className="back-link" to="/doa">← Koleksi doa</Link>
+        <Link className="back-link" to="/doa"><LearningIcon name="arrowLeft" />Daftar doa</Link>
         <p>{dua.group ?? "Doa"}</p>
       </div>
       <header className="dua-reader-heading">
@@ -96,7 +97,7 @@ export function DuaDetailPage() {
 
       <section className="reader-actions" aria-label="Pengaturan belajar">
         <div className="recall-action">
-          <p>{isLatinVisible || isTranslationVisible ? "Baca perlahan. Saat siap, coba ucapkan tanpa bantuan." : "Bantuan sedang disembunyikan. Coba ucapkan dari ingatan."}</p>
+          <p>{isLatinVisible || isTranslationVisible ? "Baca pelan-pelan. Saat siap, coba ucapkan sendiri." : "Bantuan disembunyikan. Coba ucapkan doa dari ingatan."}</p>
           <button
             className="primary-action"
             onClick={() => {
@@ -106,66 +107,44 @@ export function DuaDetailPage() {
             }}
             type="button"
           >
-            {isLatinVisible || isTranslationVisible ? "Coba dari ingatan" : "Tampilkan bantuan"}
+            <LearningIcon name={isLatinVisible || isTranslationVisible ? "try" : "help"} />
+            <span>{isLatinVisible || isTranslationVisible ? "Coba sendiri" : "Lihat bantuan"}</span>
           </button>
         </div>
 
         <div className="reader-control-grid">
-          <button
-            aria-pressed={isLatinFirst}
-            className="reader-control"
-            onClick={() => {
-              setLatinVisible(true);
-              setLatinFirst((current) => !current);
-            }}
-            type="button"
-          >
-            <strong>Posisi Latin</strong><span>{isLatinFirst ? "Latin di atas" : "Latin di bawah"}</span>
-          </button>
-          <button
-            aria-pressed={isLatinLarge}
-            className="reader-control"
-            onClick={() => {
-              setLatinLarge((current) => !current);
-              setLatinVisible(true);
-            }}
-            type="button"
-          >
-            <strong>Latin besar</strong><span>{isLatinLarge ? "Ukuran besar aktif" : "Perbesar Latin"}</span>
-          </button>
-          <button aria-pressed={isTranslationVisible} className="reader-control" onClick={() => setTranslationVisible((current) => !current)} type="button">
-            <strong>Arti doa</strong><span>{isTranslationVisible ? "Arti sedang tampil" : "Tampilkan arti"}</span>
-          </button>
-          <button
-            aria-pressed={isColorGuidance}
-            className="reader-control"
-            onClick={() => {
-              setColorGuidance((current) => !current);
-              setLatinVisible(true);
-            }}
-            type="button"
-          >
-            <strong>Warna bantu</strong><span>{isColorGuidance ? "Penanda warna aktif" : "Tandai dua teks"}</span>
-          </button>
-          <button aria-pressed={arabicSize === "small"} className="reader-control" onClick={() => setArabicSize("small")} type="button">
-            <strong>A−</strong><span>Arab kecil</span>
-          </button>
-          <button aria-pressed={arabicSize === "medium"} className="reader-control" onClick={() => setArabicSize("medium")} type="button">
-            <strong>A</strong><span>Arab sedang</span>
-          </button>
-          <button aria-pressed={arabicSize === "large"} className="reader-control" onClick={() => setArabicSize("large")} type="button">
-            <strong>A+</strong><span>Arab besar</span>
-          </button>
-          <button aria-pressed={isFocusMode} className="reader-control" onClick={() => setFocusMode(!isFocusMode)} type="button">
-            <strong>Fokus</strong><span>{isFocusMode ? "Kembali ke aplikasi" : "Tanpa navigasi"}</span>
-          </button>
+          <ReaderControl icon="order" isPressed={isLatinFirst} label="Letak Latin" onClick={() => { setLatinVisible(true); setLatinFirst((current) => !current); }} detail={isLatinFirst ? "Di atas Arab" : "Di bawah Arab"} />
+          <ReaderControl icon="textLarge" isPressed={isLatinLarge} label="Latin besar" onClick={() => { setLatinLarge((current) => !current); setLatinVisible(true); }} detail={isLatinLarge ? "Sudah besar" : "Mudah dibaca"} />
+          <ReaderControl icon="help" isPressed={isTranslationVisible} label="Lihat arti" onClick={() => setTranslationVisible((current) => !current)} detail={isTranslationVisible ? "Arti terlihat" : "Arti Indonesia"} />
+          <ReaderControl icon="color" isPressed={isColorGuidance} label="Warna bantu" onClick={() => { setColorGuidance((current) => !current); setLatinVisible(true); }} detail={isColorGuidance ? "Warna aktif" : "Tandai teks"} />
+          <ReaderControl icon="textSmall" isPressed={arabicSize === "small"} label="Arab kecil" onClick={() => setArabicSize("small")} detail="Ukuran kecil" />
+          <ReaderControl icon="textMedium" isPressed={arabicSize === "medium"} label="Arab sedang" onClick={() => setArabicSize("medium")} detail="Ukuran nyaman" />
+          <ReaderControl icon="textLarge" isPressed={arabicSize === "large"} label="Arab besar" onClick={() => setArabicSize("large")} detail="Mudah dilihat" />
+          <ReaderControl icon="focus" isPressed={isFocusMode} label="Mode fokus" onClick={() => setFocusMode(!isFocusMode)} detail={isFocusMode ? "Kembali ke menu" : "Sembunyikan menu"} />
         </div>
       </section>
 
       <details className="dua-source" open>
-        <summary>Lihat sumber doa</summary>
+        <summary>Sumber doa</summary>
         <p>{dua.source}</p>
       </details>
     </article>
+  );
+}
+
+type ReaderControlProps = {
+  readonly detail: string;
+  readonly icon: LearningIconName;
+  readonly isPressed: boolean;
+  readonly label: string;
+  readonly onClick: () => void;
+};
+
+function ReaderControl({ detail, icon, isPressed, label, onClick }: ReaderControlProps) {
+  return (
+    <button aria-pressed={isPressed} className="reader-control" onClick={onClick} type="button">
+      <span className="reader-control-heading"><LearningIcon name={icon} /><strong>{label}</strong></span>
+      <span className="reader-control-detail">{detail}</span>
+    </button>
   );
 }

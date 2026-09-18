@@ -1,4 +1,4 @@
-/* Hallmark · macrostructure: Narrative Workflow · genre: playful · theme: studied-DNA (source: user reference images) · enrichment: none · nav: product bottom-navigation · footer: none · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+/* Hallmark · macrostructure: Ecosystem Index · genre: playful · theme: studied-DNA (source: user reference images) · enrichment: none · nav: task bottom-navigation · footer: none · pre-emit critique: P5 H5 E5 S5 R5 V5 */
 
 .dua-library,
 .dua-detail,
@@ -80,11 +80,19 @@
   margin-block-start: var(--space-2xs);
 }
 
-.dua-list a > span:last-child {
+.dua-list-action {
+  align-items: center;
   color: var(--color-accent-ink);
+  display: inline-flex;
   font-size: var(--text-sm);
   font-weight: 700;
+  gap: var(--space-2xs);
   white-space: nowrap;
+}
+
+.dua-list-action .learning-icon {
+  block-size: 1rem;
+  inline-size: 1rem;
 }
 
 .dua-list a:active {
@@ -107,11 +115,14 @@
 }
 
 .dua-pagination button {
+  align-items: center;
   background: var(--color-paper-raised);
   border: var(--rule-1) solid var(--color-rule);
   border-radius: var(--radius-sm);
   color: var(--color-ink);
   cursor: pointer;
+  display: inline-flex;
+  gap: var(--space-2xs);
   font: inherit;
   font-weight: 700;
   min-block-size: 3rem;
@@ -131,8 +142,10 @@
 }
 
 .back-link {
+  align-items: center;
   color: var(--color-accent-ink);
   display: inline-flex;
+  gap: var(--space-xs);
   font-weight: 700;
   margin-block-end: var(--space-lg);
   min-block-size: 3rem;
@@ -261,11 +274,15 @@
 }
 
 .primary-action {
+  align-items: center;
   background: var(--color-accent);
   border-color: var(--color-accent);
   border-radius: var(--radius-md);
   color: var(--color-on-accent);
+  display: inline-flex;
   font-weight: 750;
+  gap: var(--space-xs);
+  justify-content: center;
   min-block-size: 3.5rem;
   padding-inline: var(--space-lg);
   transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
@@ -284,15 +301,26 @@
 }
 
 .reader-control {
-  background: var(--color-paper-raised);
+  background: var(--color-control-surface);
   border-radius: var(--radius-sm);
   display: grid;
-  gap: var(--space-2xs);
+  gap: var(--space-xs);
   justify-items: start;
-  min-block-size: 5.25rem;
+  min-block-size: 5.5rem;
   padding: var(--space-sm);
   text-align: start;
   transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.reader-control-heading {
+  align-items: center;
+  display: flex;
+  gap: var(--space-xs);
+  min-inline-size: 0;
+}
+
+.reader-control-heading .learning-icon {
+  color: var(--color-accent-ink);
 }
 
 .reader-control strong {
@@ -301,23 +329,22 @@
   line-height: 1.15;
 }
 
-.reader-control span {
+.reader-control-detail {
   color: var(--color-muted);
   font-size: var(--text-xs);
   white-space: nowrap;
 }
 
-.reader-control strong {
-  white-space: nowrap;
-}
+.reader-control strong,
+.reader-control-detail { white-space: nowrap; }
 
 .reader-control[aria-pressed="true"] {
-  background: var(--color-active-surface);
+  background: var(--color-control-active);
   border-color: var(--color-accent);
   color: var(--color-accent-ink);
 }
 
-.reader-control[aria-pressed="true"] span {
+.reader-control[aria-pressed="true"] .reader-control-detail {
   color: var(--color-accent-ink);
 }
 
