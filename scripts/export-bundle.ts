@@ -7,7 +7,7 @@
  * from the reviewed rows, so a regenerated bundle is a reviewable git diff
  * (06-CONTENT-INTEGRITY.md).
  */
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -87,6 +87,20 @@ async function main(): Promise<void> {
 
   if (items.length !== listed.length) {
     throw new Error(`Bundle would drop items: ${listed.length} active, ${items.length} exported.`);
+  }
+
+  // Keep the export idempotent: an unchanged catalogue must not produce a diff,
+  // so the timestamp only moves when the content itself does.
+  const previous = await readFile(bundlePath, "utf8").catch(() => undefined);
+  const previousContent = previous ? (JSON.parse(previous) as { generatedAt?: string; chapters?: unknown; items?: unknown }) : undefined;
+  const unchanged =
+    previousContent !== undefined &&
+    JSON.stringify({ chapters: previousContent.chapters, items: previousContent.items }) ===
+      JSON.stringify({ chapters, items });
+
+  if (unchanged) {
+    logger.info("bundle_unchanged", { items: items.length, chapters: chapters.length });
+    return;
   }
 
   await mkdir(path.dirname(bundlePath), { recursive: true });
