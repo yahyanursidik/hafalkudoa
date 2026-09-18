@@ -150,17 +150,6 @@ export async function listActiveDua(
   return rows(result).map(toPublicDuaListItem);
 }
 
-export function parseAudience(value: unknown): DuaAudience | undefined {
-  if (value === undefined || value === "" || value === "ALL") {
-    return undefined;
-  }
-  const parsed = duaAudienceSchema.safeParse(typeof value === "string" ? value.toUpperCase() : value);
-  if (!parsed.success) {
-    throw new AppError(400, "BAD_REQUEST", "audience must be one of KIDS, FAMILY, ADULT, ALL.");
-  }
-  return parsed.data;
-}
-
 const duaIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export function isDuaId(value: string): boolean {

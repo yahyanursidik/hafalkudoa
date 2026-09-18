@@ -7,9 +7,9 @@ B0 backend foundation built with TypeScript, Vercel Functions, Neon PostgreSQL, 
 1. Copy `.env.example` to `.env` and set a Neon `DATABASE_URL`.
 2. Install dependencies with `npm install`.
 3. Apply foundation migrations with `npm run db:migrate`.
-4. Run locally with `vercel dev`, then call `GET /api/v1/health`.
+4. Run locally with `npm run dev:web`, then call `GET /api/v1/health`.
 
-The health endpoint checks database reachability and returns `200` only if Neon responds. It uses the shared error response shape for request failures.
+The health endpoint always returns `200` once the shipped catalogue loads, and reports the database separately as `ok`, `unavailable`, or `not-configured`. A database outage is visible there without taking the site down.
 
 ## Commands
 
@@ -93,23 +93,20 @@ expects a versioned runtime package there, not a Node label, so the block was
 removed (commit `53d3108`) and the project now uses the default Node runtime
 that `engines.node` selects. The current `vercel.json` needs no `functions` key.
 
-Before the first successful deploy, set the project environment variable:
+The deployment needs no environment variable. Reads come from the bundle that
+ships with it, so `DATABASE_URL` is optional and only decides whether
+`GET /api/v1/health` reports the authoring database as `ok` or `not-configured`.
 
-- `DATABASE_URL` — the Neon pooled connection string, for Production, Preview,
-  and Development
-
-Without it every `/api/v1/*` route answers `500` and the function log reads
-`Invalid environment configuration: DATABASE_URL`.
-
-Deploy steps (the CLI login in this workspace has expired, so step 1 must run in
-an interactive terminal):
+Deploy (step 1 needs an interactive terminal for the browser login):
 
 ```
 vercel login
-vercel link --yes
-vercel env add DATABASE_URL production
 vercel deploy --prod
 ```
+
+The project was created through the CLI and is not linked to the GitHub repo,
+so a push does not deploy. Connect the repo in the Vercel dashboard if you want
+every push to `main` to ship.
 
 Migrations do not run during the Vercel build. Apply them from a machine that
 has `.env.local`:
@@ -139,5 +136,7 @@ npm run doa:chunks
 npm run doa:export
 ```
 
-The read API under `/api/v1/*` stays available and still reads Neon. It is no
-longer on the critical path for rendering the catalogue.
+The read API under `/api/v1/*` serves the same bundle, so no read path touches
+Neon and `DATABASE_URL` is not required to run the deployment. Neon is only
+needed by the authoring commands (`doa:sync`, `doa:curate-apply`, `doa:chunks`,
+`doa:export`), which run from a developer machine.

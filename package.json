@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "npm run build:api && npm run build:web",
-    "build:api": "tsc --project tsconfig.build.json",
+    "build:api": "tsc --project tsconfig.build.json --noEmit",
     "build:web": "vite build --config web/vite.config.ts",
     "dev:web": "vite --config web/vite.config.ts",
     "lint": "eslint .",
