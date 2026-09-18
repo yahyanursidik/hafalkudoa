@@ -1,0 +1,301 @@
+/* Hallmark · macrostructure: Narrative Workflow · genre: playful · theme: studied-DNA (source: user reference images) · enrichment: none · nav: product bottom-navigation · footer: none · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+
+.home-path {
+  display: grid;
+  gap: var(--space-page-section);
+  margin-inline: auto;
+  max-inline-size: 44rem;
+  min-inline-size: 0;
+  padding-block-end: var(--space-xl);
+}
+
+.home-hero {
+  min-inline-size: 0;
+  padding-block: var(--space-sm) var(--space-xl);
+}
+
+.home-brand {
+  margin-block-end: var(--space-xl);
+}
+
+.home-brand .brand-mark {
+  block-size: 3.25rem;
+  inline-size: 3.25rem;
+}
+
+.home-brand .brand-name strong {
+  font-size: var(--text-lg);
+}
+
+.home-greeting,
+.landing-kicker {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin: 0 0 var(--space-sm);
+}
+
+.landing-kicker {
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+.home-hero h1,
+.home-feature h2,
+.home-start h2 {
+  font-family: var(--font-sans);
+  font-style: normal;
+  letter-spacing: -0.065em;
+  line-height: 0.94;
+  margin: 0;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.home-hero h1 {
+  font-size: clamp(3rem, 14vw, 5.25rem);
+  font-weight: 850;
+  max-inline-size: 7ch;
+}
+
+.home-lede {
+  color: var(--color-muted);
+  font-size: var(--text-lg);
+  line-height: 1.55;
+  margin-block: var(--space-lg);
+  max-inline-size: 32rem;
+}
+
+.home-hero-link,
+.feature-card a {
+  align-items: center;
+  display: inline-flex;
+  font-weight: 800;
+  gap: var(--space-sm);
+  min-block-size: 3rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home-hero-link {
+  background: var(--color-accent);
+  border: var(--rule-1) solid var(--color-accent);
+  border-radius: var(--radius-md);
+  color: var(--color-on-accent);
+  padding-inline: var(--space-lg);
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.home-feature,
+.home-start {
+  display: grid;
+  gap: var(--space-lg);
+  min-inline-size: 0;
+}
+
+.home-feature header > p:last-child,
+.home-start header > p {
+  color: var(--color-muted);
+  margin: var(--space-sm) 0 0;
+  max-inline-size: 31rem;
+}
+
+.home-feature h2,
+.home-start h2 {
+  font-size: clamp(var(--text-2xl), 9vw, 3.25rem);
+  font-weight: 850;
+}
+
+.feature-card {
+  align-items: end;
+  background: var(--color-home-highlight);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: minmax(0, 1fr);
+  min-block-size: 13rem;
+  padding: var(--space-lg);
+  color: var(--color-ink);
+}
+
+.feature-card p,
+.feature-card h3,
+.feature-card span {
+  display: block;
+  margin: 0;
+}
+
+.feature-card p,
+.feature-card span {
+  color: var(--color-accent-ink);
+  font-size: var(--text-sm);
+}
+
+.feature-card h3 {
+  font-family: var(--font-sans);
+  font-size: clamp(var(--text-lg), 6vw, var(--text-2xl));
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  margin-block: var(--space-xs);
+  overflow-wrap: anywhere;
+}
+
+.feature-card a {
+  background: var(--color-paper-raised);
+  border: var(--rule-1) solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  color: var(--color-accent-ink);
+  justify-content: center;
+  padding-inline: var(--space-md);
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.starter-grid {
+  display: grid;
+  gap: var(--space-sm);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.starter-card {
+  border-radius: var(--radius-lg);
+  color: var(--color-ink);
+  display: grid;
+  min-block-size: 10rem;
+  padding: var(--space-lg);
+  position: relative;
+  text-decoration: none;
+  transition: transform var(--dur-fast) var(--ease-out), outline-color var(--dur-fast) var(--ease-out);
+}
+
+.starter-card span,
+.starter-card small {
+  color: var(--color-ink);
+  font-weight: 650;
+  font-size: var(--text-sm);
+}
+
+.starter-card strong {
+  align-self: center;
+  font-family: var(--font-sans);
+  font-size: clamp(var(--text-lg), 7vw, var(--text-2xl));
+  font-weight: 850;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  max-inline-size: 8ch;
+}
+
+.starter-card i {
+  align-self: end;
+  font-size: var(--text-lg);
+  font-style: normal;
+  justify-self: end;
+}
+
+.starter-card-library {
+  background: var(--color-home-sky);
+  color: var(--color-ink);
+}
+
+.starter-card-memorize {
+  background: var(--color-home-rose);
+  color: var(--color-ink);
+}
+
+.starter-card-review {
+  background: var(--color-home-leaf);
+  color: var(--color-ink);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  list-style: none;
+  margin: var(--space-md) 0 0;
+  padding: 0;
+}
+
+.tag-list li {
+  border: var(--rule-1) solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  padding-block: var(--space-2xs);
+  padding-inline: var(--space-sm);
+}
+
+.dua-copy h3 {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--space-xs);
+}
+
+.dua-copy p {
+  color: var(--color-muted);
+  margin: 0 0 var(--space-lg);
+  max-inline-size: 42rem;
+}
+
+.dua-source {
+  background: var(--color-source-surface);
+  border: var(--rule-1) solid var(--color-rule);
+  padding: var(--space-md);
+}
+
+.dua-source summary {
+  color: var(--color-ink);
+  cursor: pointer;
+  font-weight: 700;
+  min-block-size: 2.75rem;
+}
+
+.dua-source p {
+  color: var(--color-muted);
+  margin: var(--space-sm) 0 0;
+  white-space: pre-line;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-hero-link:hover {
+    background: var(--color-accent-ink);
+    transform: translateY(-1px);
+  }
+
+  .feature-card a:hover {
+    background: var(--color-practice-surface);
+    transform: translateY(-1px);
+  }
+
+  .starter-card:hover {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    transform: translateY(-1px);
+  }
+}
+
+.home-hero-link:active,
+.feature-card a:active,
+.starter-card:active {
+  transform: translateY(1px);
+}
+
+@media (min-width: 40rem) {
+  .feature-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .starter-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .starter-card-library {
+    grid-row: span 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .starter-card {
+    transition-duration: 0ms;
+  }
+}

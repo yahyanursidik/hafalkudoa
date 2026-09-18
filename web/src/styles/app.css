@@ -1,0 +1,251 @@
+/* Hallmark · macrostructure: Narrative Workflow · genre: playful · theme: studied-DNA (source: user reference images) · enrichment: none · nav: product bottom-navigation · footer: none · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+@import "./tokens.css";
+
+html,
+body {
+  min-inline-size: 0;
+  min-block-size: 100%;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.app-frame {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-block-size: 100dvh;
+}
+
+.app-header {
+  align-items: center;
+  background: var(--color-paper-raised);
+  border-block-end: var(--rule-1) solid var(--color-rule);
+  display: flex;
+  gap: var(--space-md);
+  justify-content: space-between;
+  padding-block: var(--space-md);
+  padding-inline: max(var(--space-md), env(safe-area-inset-left)) max(var(--space-md), env(safe-area-inset-right));
+}
+
+.wordmark {
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand-lockup {
+  align-items: center;
+  display: inline-flex;
+  gap: var(--space-xs);
+  min-inline-size: 0;
+}
+
+.brand-mark {
+  block-size: 2.3rem;
+  display: block;
+  flex: 0 0 auto;
+  inline-size: 2.3rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.brand-mark img {
+  inline-size: 241.15%;
+  left: -71.15%;
+  max-inline-size: none;
+  mix-blend-mode: multiply;
+  position: absolute;
+  top: -45.2%;
+}
+
+.brand-name {
+  display: grid;
+  font-family: var(--font-sans);
+  line-height: 0.92;
+}
+
+.brand-name strong {
+  font-size: var(--text-base);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+}
+
+.brand-name span {
+  color: var(--color-accent-ink);
+  font-size: var(--text-xs);
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+
+.shell-context,
+.route-context {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.shell-context {
+  background: var(--color-practice-surface);
+  border-radius: var(--radius-pill);
+  color: var(--color-accent-ink);
+  font-weight: 700;
+  padding-block: var(--space-2xs);
+  padding-inline: var(--space-sm);
+  white-space: nowrap;
+}
+
+.app-main {
+  display: grid;
+  min-inline-size: 0;
+  padding-block: var(--space-2xl);
+  padding-inline: max(var(--space-lg), env(safe-area-inset-left)) max(var(--space-lg), env(safe-area-inset-right));
+}
+
+.app-frame.is-learning-focus {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.app-frame.is-learning-focus .app-header,
+.app-frame.is-learning-focus .bottom-navigation {
+  display: none;
+}
+
+.app-frame.is-learning-focus .app-main {
+  padding-block: var(--space-lg);
+}
+
+.route-intro {
+  align-self: center;
+  max-inline-size: 34rem;
+  min-inline-size: 0;
+}
+
+.route-brand {
+  margin-block-end: var(--space-md);
+}
+
+.route-intro h1 {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 7vw, var(--text-3xl));
+  font-style: normal;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin-block: var(--space-xs) var(--space-sm);
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.route-intro > p:last-child {
+  color: var(--color-muted);
+  font-size: var(--text-lg);
+  margin: 0;
+}
+
+.bottom-navigation {
+  background: var(--color-paper-raised);
+  border-block-start: var(--rule-1) solid var(--color-rule);
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  padding-block: var(--space-xs) max(var(--space-xs), env(safe-area-inset-bottom));
+  padding-inline: max(var(--space-2xs), env(safe-area-inset-left)) max(var(--space-2xs), env(safe-area-inset-right));
+}
+
+.navigation-link {
+  align-items: center;
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  display: grid;
+  font-size: var(--text-xs);
+  font-weight: 650;
+  gap: var(--space-2xs);
+  justify-items: center;
+  line-height: 1;
+  min-block-size: 3.5rem;
+  padding-block: var(--space-2xs);
+  padding-inline: var(--space-2xs);
+  text-decoration: none;
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+.navigation-link svg {
+  block-size: 1.3rem;
+  fill: none;
+  inline-size: 1.3rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.75;
+}
+
+.navigation-link.is-active {
+  background: var(--color-active-surface);
+  color: var(--color-accent-ink);
+}
+
+.navigation-link:active {
+  background: var(--color-review-surface);
+  transform: translateY(1px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .navigation-link:hover {
+    background: var(--color-active-surface);
+    color: var(--color-accent-ink);
+  }
+}
+
+@media (min-width: 40rem) {
+  .app-header,
+  .app-main {
+    padding-inline: max(var(--space-xl), env(safe-area-inset-left)) max(var(--space-xl), env(safe-area-inset-right));
+  }
+
+  .bottom-navigation {
+    justify-self: center;
+    margin-block: var(--space-sm);
+    margin-inline: var(--space-sm);
+    max-inline-size: 34rem;
+    min-inline-size: 30rem;
+    padding: var(--space-xs);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto;
+    transition-duration: 0ms;
+  }
+}

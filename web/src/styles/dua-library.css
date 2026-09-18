@@ -1,0 +1,374 @@
+/* Hallmark · macrostructure: Narrative Workflow · genre: playful · theme: studied-DNA (source: user reference images) · enrichment: none · nav: product bottom-navigation · footer: none · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+
+.dua-library,
+.dua-detail,
+.dua-status {
+  margin-inline: auto;
+  max-inline-size: 48rem;
+  min-inline-size: 0;
+}
+
+.dua-library-heading h1,
+.dua-detail h1,
+.dua-status h1 {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 8vw, var(--text-3xl));
+  font-style: normal;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin: 0;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.dua-library-heading > p:last-child,
+.dua-status > p {
+  color: var(--color-muted);
+  margin-block: var(--space-sm) var(--space-xl);
+  max-inline-size: 42rem;
+}
+
+.dua-status {
+  background: var(--color-help-surface);
+  border-radius: var(--radius-md);
+  color: var(--color-ink);
+  padding: var(--space-lg);
+}
+
+.dua-status > p {
+  color: var(--color-accent-ink);
+}
+
+.dua-list {
+  border-block: var(--rule-1) solid var(--color-rule);
+  list-style-position: inside;
+  margin: 0;
+  padding: 0;
+}
+
+.dua-list li::marker {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.dua-list li + li {
+  border-block-start: var(--rule-1) solid var(--color-rule);
+}
+
+.dua-list a {
+  align-items: center;
+  background: var(--color-paper-raised);
+  color: var(--color-ink);
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: space-between;
+  min-block-size: 4.5rem;
+  padding-block: var(--space-sm);
+  padding-inline: var(--space-xs);
+  text-decoration: none;
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.dua-list strong,
+.dua-list small {
+  display: block;
+}
+
+.dua-list small {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin-block-start: var(--space-2xs);
+}
+
+.dua-list a > span:last-child {
+  color: var(--color-accent-ink);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.dua-list a:active {
+  transform: translateY(1px);
+}
+
+.dua-pagination {
+  align-items: center;
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: space-between;
+  margin-block-start: var(--space-lg);
+}
+
+.dua-pagination p {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin: 0;
+  text-align: center;
+}
+
+.dua-pagination button {
+  background: var(--color-paper-raised);
+  border: var(--rule-1) solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  min-block-size: 3rem;
+  padding-inline: var(--space-md);
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+.dua-pagination button:active {
+  transform: translateY(1px);
+}
+
+.dua-pagination button:disabled {
+  color: var(--color-muted);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.back-link {
+  color: var(--color-accent-ink);
+  display: inline-flex;
+  font-weight: 700;
+  margin-block-end: var(--space-lg);
+  min-block-size: 3rem;
+  text-decoration-thickness: var(--rule-1);
+  text-underline-offset: var(--space-2xs);
+}
+
+.dua-detail > .tag-list {
+  margin-block-end: var(--space-lg);
+}
+
+.reader-topline {
+  align-items: center;
+  border-block-end: var(--rule-1) solid var(--color-rule);
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: space-between;
+  margin-block-end: var(--space-lg);
+}
+
+.reader-topline .back-link {
+  margin: 0;
+}
+
+.reader-topline p {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin: 0;
+  text-align: end;
+}
+
+.dua-reader-heading {
+  margin-block-end: var(--space-xl);
+}
+
+.dua-reader-heading .tag-list {
+  margin-block-start: var(--space-md);
+}
+
+.reader-stage {
+  background: var(--color-paper-raised);
+  border-block: var(--rule-1) solid var(--color-rule);
+  color: var(--color-ink);
+  margin-block-end: var(--space-xl);
+}
+
+.reader-stage .dua-arabic {
+  background: transparent;
+  font-family: var(--font-arabic);
+  margin: 0;
+  padding-block: var(--space-xl);
+  padding-inline: 0;
+  text-align: center;
+}
+
+.reader-stage.arabic-size-small .dua-arabic {
+  font-size: clamp(2rem, 8vw, 3rem);
+}
+
+.reader-stage.arabic-size-medium .dua-arabic {
+  font-size: clamp(2.6rem, 12vw, var(--text-arabic-lg));
+}
+
+.reader-stage.arabic-size-large .dua-arabic {
+  font-size: clamp(3rem, 14vw, var(--text-arabic-xl));
+}
+
+.reader-latin,
+.reader-translation {
+  border-block-start: var(--rule-1) solid var(--color-rule);
+  padding-block: var(--space-lg);
+}
+
+.reader-latin h2,
+.reader-translation h2 {
+  color: var(--color-accent-ink);
+}
+
+.reader-latin.is-large p {
+  color: var(--color-ink);
+  font-size: clamp(1.65rem, 7vw, 2.4rem);
+  line-height: 1.65;
+}
+
+.reader-stage.has-color-guidance .dua-arabic {
+  background: var(--color-reading-surface);
+  box-shadow: inset 0 -0.35rem 0 var(--color-active-surface);
+  padding-inline: var(--space-md);
+}
+
+.reader-stage.has-color-guidance .reader-latin {
+  background: var(--color-help-surface);
+  color: var(--color-accent-ink);
+  padding-inline: var(--space-md);
+}
+
+.reader-stage.has-color-guidance .reader-latin h2,
+.reader-stage.has-color-guidance .reader-latin p {
+  color: var(--color-accent-ink);
+}
+
+.reader-actions {
+  border-block-end: var(--rule-1) solid var(--color-rule);
+  margin-block-end: var(--space-xl);
+  padding-block-end: var(--space-xl);
+}
+
+.recall-action {
+  align-items: center;
+  display: grid;
+  gap: var(--space-md);
+  margin-block-end: var(--space-md);
+}
+
+.recall-action p {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.primary-action,
+.reader-control {
+  border: var(--rule-1) solid var(--color-rule);
+  color: var(--color-ink);
+  cursor: pointer;
+  font: inherit;
+}
+
+.primary-action {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  border-radius: var(--radius-md);
+  color: var(--color-on-accent);
+  font-weight: 750;
+  min-block-size: 3.5rem;
+  padding-inline: var(--space-lg);
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+.primary-action:active,
+.reader-control:active {
+  transform: translateY(1px);
+}
+
+.reader-control-grid {
+  display: grid;
+  gap: var(--space-xs);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.reader-control {
+  background: var(--color-paper-raised);
+  border-radius: var(--radius-sm);
+  display: grid;
+  gap: var(--space-2xs);
+  justify-items: start;
+  min-block-size: 5.25rem;
+  padding: var(--space-sm);
+  text-align: start;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.reader-control strong {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.15;
+}
+
+.reader-control span {
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.reader-control strong {
+  white-space: nowrap;
+}
+
+.reader-control[aria-pressed="true"] {
+  background: var(--color-active-surface);
+  border-color: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.reader-control[aria-pressed="true"] span {
+  color: var(--color-accent-ink);
+}
+
+.dua-detail .dua-source {
+  margin-block-end: var(--space-xl);
+}
+
+.dua-detail .dua-copy h2 {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--space-xs);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dua-list a:hover,
+  .dua-pagination button:hover:not(:disabled) {
+    background: var(--color-reading-surface);
+  }
+
+  .primary-action:hover {
+    background: var(--color-accent-ink);
+  }
+
+  .reader-control:hover {
+    background: var(--color-reading-surface);
+    border-color: var(--color-accent);
+  }
+}
+
+@media (min-width: 40rem) {
+  .recall-action {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .primary-action {
+    min-inline-size: 13rem;
+  }
+
+  .reader-control-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dua-pagination button {
+    transition-duration: 0ms;
+  }
+
+  .primary-action,
+  .reader-control {
+    transition-duration: 0ms;
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "doa-dzikir-kids-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Backend foundation for Doa & Dzikir Anak.",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "npm run build:api && npm run build:web",
+    "build:api": "tsc --project tsconfig.build.json",
+    "build:web": "vite build --config web/vite.config.ts",
+    "dev:web": "vite --config web/vite.config.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "doa:sync": "node --env-file=.env.local --import tsx scripts/doa.ts sync",
+    "doa:sync-valid": "node --env-file=.env.local --import tsx scripts/doa.ts sync-valid",
+    "doa:validate": "node --env-file=.env.local --import tsx scripts/doa.ts validate",
+    "doa:diff": "node --env-file=.env.local --import tsx scripts/doa.ts diff",
+    "doa:review": "node --env-file=.env.local --import tsx scripts/doa.ts review",
+    "doa:approve": "node --env-file=.env.local --import tsx scripts/doa.ts approve",
+    "doa:activate": "node --env-file=.env.local --import tsx scripts/doa.ts activate",
+    "doa:publish-all": "node --env-file=.env.local --import tsx scripts/doa.ts publish-all"
+  },
+  "dependencies": {
+    "@neon/config": "^1.7.2",
+    "@neondatabase/serverless": "^1.0.2",
+    "@refinedev/core": "^5.0.12",
+    "@vercel/node": "^5.3.14",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^7.18.4",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "eslint": "^9.39.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.2",
+    "vite": "^8.3.0",
+    "vitest": "^4.0.8"
+  }
+}

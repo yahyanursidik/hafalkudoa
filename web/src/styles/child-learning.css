@@ -1,0 +1,177 @@
+/* Hallmark · macrostructure: Narrative Workflow · genre: playful · theme: studied-DNA (source: user reference images)
+ * states: default · hover · focus · active · disabled · loading · error · success
+ * contrast: pass (46–50)
+ */
+
+.child-learning-path {
+  display: grid;
+  gap: var(--space-2xl);
+  margin-inline: auto;
+  max-inline-size: 48rem;
+  min-inline-size: 0;
+}
+
+.child-learning-hero h1,
+.learning-stage h2 {
+  font-family: var(--font-sans);
+  font-style: normal;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.child-learning-hero h1 {
+  font-size: clamp(var(--text-2xl), 10vw, 3.5rem);
+  font-weight: 850;
+  max-inline-size: 14ch;
+}
+
+.child-learning-hero > p:last-child,
+.learning-stage header span,
+.child-learning-note {
+  color: var(--color-muted);
+  margin: var(--space-md) 0 0;
+  max-inline-size: 36rem;
+}
+
+.learning-stage-list,
+.learning-stage ol {
+  display: grid;
+  gap: var(--space-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.learning-stage {
+  border-block-start: var(--rule-1) solid var(--color-rule);
+  padding-block-start: var(--space-xl);
+}
+
+.learning-stage header > p {
+  background: var(--color-practice-surface);
+  border-radius: var(--radius-pill);
+  color: var(--color-accent-ink);
+  display: inline-flex;
+  font-size: var(--text-sm);
+  font-weight: 800;
+  margin: 0 0 var(--space-xs);
+  padding-block: var(--space-2xs);
+  padding-inline: var(--space-sm);
+}
+
+.learning-stage-2 header > p {
+  background: var(--color-help-surface);
+}
+
+.learning-stage-3 header > p {
+  background: var(--color-review-surface);
+}
+
+.learning-stage h2 {
+  font-size: clamp(var(--text-xl), 7vw, var(--text-2xl));
+  font-weight: 850;
+}
+
+.learning-stage header span {
+  display: block;
+}
+
+.learning-stage ol {
+  gap: var(--space-xs);
+  margin-block-start: var(--space-lg);
+}
+
+.learning-stage li a {
+  align-items: center;
+  background: var(--color-paper-raised);
+  border: var(--rule-1) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  display: grid;
+  gap: var(--space-sm);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  min-block-size: 5rem;
+  padding: var(--space-sm);
+  text-decoration: none;
+  color: var(--color-ink);
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.learning-step-number {
+  align-items: center;
+  background: var(--color-active-surface);
+  border-radius: 999px;
+  color: var(--color-accent-ink);
+  display: inline-flex;
+  font-size: var(--text-sm);
+  font-weight: 850;
+  justify-content: center;
+  min-block-size: 2rem;
+  min-inline-size: 2rem;
+}
+
+.learning-stage-2 .learning-step-number {
+  background: var(--color-help-surface);
+}
+
+.learning-stage-3 .learning-step-number {
+  background: var(--color-review-surface);
+}
+
+.learning-stage small,
+.learning-stage strong {
+  display: block;
+}
+
+.learning-stage small {
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  margin-block-end: var(--space-2xs);
+}
+
+.learning-stage strong {
+  font-size: var(--text-base);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.learning-step-action {
+  align-items: center;
+  color: var(--color-accent-ink);
+  display: inline-flex;
+  gap: var(--space-xs);
+  font-size: var(--text-lg);
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.learning-step-action > span:first-child {
+  font-size: var(--text-sm);
+}
+
+.child-learning-note {
+  background: var(--color-source-surface);
+  border-block-start: var(--rule-1) solid var(--color-rule);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  padding-block-start: var(--space-lg);
+  padding-inline: var(--space-md);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .learning-stage li a:hover {
+    background: var(--color-help-surface);
+    border-color: var(--color-accent);
+  }
+}
+
+.learning-stage li a:active {
+  transform: translateY(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learning-stage li a {
+    transition-duration: 0ms;
+  }
+}
