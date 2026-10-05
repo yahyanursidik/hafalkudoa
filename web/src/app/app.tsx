@@ -1,10 +1,10 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ReactNode } from "react";
 import { Refine } from "@refinedev/core";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AppShell } from "../components/app-shell.js";
 import { HomePage } from "../components/home-page.js";
-import { RoutePlaceholder } from "../components/route-placeholder.js";
-import { appRoutes, type AppRoute } from "./routes.js";
+import { ProgressProvider } from "../components/progress-provider.js";
+import { appRoutes } from "./routes.js";
 
 const resources = appRoutes.map((route) => ({
   name: route.key,
@@ -14,56 +14,33 @@ const resources = appRoutes.map((route) => ({
 const DuaCatalogPage = lazy(async () => ({ default: (await import("../components/dua-catalog-page.js")).DuaCatalogPage }));
 const DuaDetailPage = lazy(async () => ({ default: (await import("../components/dua-detail-page.js")).DuaDetailPage }));
 const ChildLearningPage = lazy(async () => ({ default: (await import("../components/child-learning-page.js")).ChildLearningPage }));
+const MemorizeSessionPage = lazy(async () => ({ default: (await import("../components/memorize-session-page.js")).MemorizeSessionPage }));
+const ReviewPage = lazy(async () => ({ default: (await import("../components/review-page.js")).ReviewPage }));
+const CompanionPage = lazy(async () => ({ default: (await import("../components/companion-page.js")).CompanionPage }));
 
-const homeRoute = appRoutes.find((route) => route.key === "home");
-const memorizeRoute = appRoutes.find((route) => route.key === "memorize");
-const duaRoute = appRoutes.find((route) => route.key === "dua");
-const secondaryRoutes = appRoutes.filter((route) => route.key !== "home" && route.key !== "memorize" && route.key !== "dua");
-
-function isHomeRoute(route: AppRoute | undefined): route is AppRoute {
-  return route?.key === "home";
-}
-
-function isDuaRoute(route: AppRoute | undefined): route is AppRoute {
-  return route?.key === "dua";
-}
-
-function isMemorizeRoute(route: AppRoute | undefined): route is AppRoute {
-  return route?.key === "memorize";
+function Loading({ children, label }: { readonly children: ReactNode; readonly label: string }) {
+  return <Suspense fallback={<p className="dua-status" role="status">{label}</p>}>{children}</Suspense>;
 }
 
 export function App() {
   return (
-    <Refine resources={resources} options={{ disableTelemetry: true }}>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<AppShell />}>
-            {isHomeRoute(homeRoute) && <Route path={homeRoute.path} element={<HomePage />} />}
-            {isMemorizeRoute(memorizeRoute) && (
-              <Route
-                path={memorizeRoute.path}
-                element={<Suspense fallback={<p className="dua-status" role="status">Menyiapkan jalur hafalan…</p>}><ChildLearningPage /></Suspense>}
-              />
-            )}
-            {isDuaRoute(duaRoute) && (
-              <Route
-                path={duaRoute.path}
-                element={<Suspense fallback={<p className="dua-status" role="status">Memuat daftar doa…</p>}><DuaCatalogPage /></Suspense>}
-              />
-            )}
-            {isDuaRoute(duaRoute) && (
-              <Route
-                path={`${duaRoute.path}/:id`}
-                element={<Suspense fallback={<p className="dua-status" role="status">Memuat doa…</p>}><DuaDetailPage /></Suspense>}
-              />
-            )}
-            {secondaryRoutes.map((route) => (
-              <Route key={route.key} path={route.path} element={<RoutePlaceholder route={route} />} />
-            ))}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </Refine>
+    <ProgressProvider>
+      <Refine resources={resources} options={{ disableTelemetry: true }}>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<AppShell />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/hafalan" element={<Loading label="Menyiapkan jalur hafalan…"><ChildLearningPage /></Loading>} />
+              <Route path="/hafalan/:id" element={<Loading label="Menyiapkan latihan…"><MemorizeSessionPage /></Loading>} />
+              <Route path="/murajaah" element={<Loading label="Menyiapkan ulangan…"><ReviewPage /></Loading>} />
+              <Route path="/doa" element={<Loading label="Memuat daftar doa…"><DuaCatalogPage /></Loading>} />
+              <Route path="/doa/:id" element={<Loading label="Memuat doa…"><DuaDetailPage /></Loading>} />
+              <Route path="/saya" element={<Loading label="Memuat ruang pendamping…"><CompanionPage /></Loading>} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </Refine>
+    </ProgressProvider>
   );
 }

@@ -9,6 +9,14 @@ if (!root) {
   throw new Error("Application root is unavailable.");
 }
 
+if (import.meta.env.PROD && "serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    void navigator.serviceWorker.register("/sw.js").catch(() => {
+      // Offline support is a bonus; the app works without it.
+    });
+  });
+}
+
 createRoot(root).render(
   <StrictMode>
     <App />

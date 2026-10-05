@@ -12,4 +12,16 @@ export default tseslint.config(
       "@typescript-eslint/no-explicit-any": "error",
     },
   },
+  {
+    // The service worker runs outside the page, with its own globals.
+    files: ["web/public/sw.js"],
+    languageOptions: {
+      globals: {
+        URL: "readonly",
+        caches: "readonly",
+        fetch: "readonly",
+        self: "readonly",
+      },
+    },
+  },
 );

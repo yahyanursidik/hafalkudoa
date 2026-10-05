@@ -429,3 +429,9 @@
 .dua-filter:active {
   transform: translateY(1px);
 }
+
+.reader-practice {
+  justify-content: center;
+  margin-block-end: var(--space-md);
+  inline-size: 100%;
+}

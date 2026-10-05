@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchActiveDuaDetail, type PublicDuaDetail } from "../content/dua-api.js";
 import { useLearningFocus } from "./learning-focus.js";
+import { useProgress } from "./progress-provider.js";
 import { LearningIcon, type LearningIconName } from "./learning-icon.js";
 import "../styles/dua-library.css";
 
@@ -12,13 +13,14 @@ type DetailState =
 
 export function DuaDetailPage() {
   const { id } = useParams();
+  const { settings } = useProgress();
   const [state, setState] = useState<DetailState>({ status: "loading" });
-  const [isLatinVisible, setLatinVisible] = useState(true);
-  const [isLatinFirst, setLatinFirst] = useState(false);
-  const [isLatinLarge, setLatinLarge] = useState(false);
-  const [isTranslationVisible, setTranslationVisible] = useState(false);
-  const [isColorGuidance, setColorGuidance] = useState(false);
-  const [arabicSize, setArabicSize] = useState<"small" | "medium" | "large">("medium");
+  const [isLatinVisible, setLatinVisible] = useState(settings.latinVisible);
+  const [isLatinFirst, setLatinFirst] = useState(settings.latinFirst);
+  const [isLatinLarge, setLatinLarge] = useState(settings.latinLarge);
+  const [isTranslationVisible, setTranslationVisible] = useState(settings.translationVisible);
+  const [isColorGuidance, setColorGuidance] = useState(settings.colorGuidance);
+  const [arabicSize, setArabicSize] = useState<"small" | "medium" | "large">(settings.arabicSize);
   const { isFocusMode, setFocusMode } = useLearningFocus();
 
   useEffect(() => {
@@ -96,6 +98,10 @@ export function DuaDetailPage() {
       </section>
 
       <section className="reader-actions" aria-label="Pengaturan belajar">
+        <Link className="primary-action reader-practice" to={`/hafalan/${dua.id}`}>
+          <LearningIcon name="steps" />
+          <span>Latih hafalan doa ini</span>
+        </Link>
         <div className="recall-action">
           <p>{isLatinVisible || isTranslationVisible ? "Baca pelan-pelan. Saat siap, coba ucapkan sendiri." : "Bantuan disembunyikan. Coba ucapkan doa dari ingatan."}</p>
           <button

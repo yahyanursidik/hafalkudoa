@@ -1,0 +1,94 @@
+/* Hallmark · review queue: a short list of what is due, nothing else */
+
+.review,
+.review-empty {
+  margin-inline: auto;
+  max-inline-size: 42rem;
+  min-inline-size: 0;
+}
+
+.review-empty {
+  background: var(--color-review-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.review-heading h1,
+.review-empty h1 {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-lg), 6vw, var(--text-2xl));
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 var(--space-sm);
+  overflow-wrap: anywhere;
+}
+
+.review-heading > p:last-child,
+.review-empty > p {
+  color: var(--color-muted);
+  margin-block: 0 var(--space-lg);
+}
+
+.review-list,
+.review-upcoming ul {
+  display: grid;
+  gap: var(--space-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.review-list a,
+.review-upcoming a {
+  align-items: center;
+  background: var(--color-paper-raised);
+  border: var(--rule-1) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  color: inherit;
+  display: flex;
+  gap: var(--space-md);
+  justify-content: space-between;
+  min-block-size: 4rem;
+  padding: var(--space-md);
+  text-decoration: none;
+}
+
+.review-list a {
+  background: var(--color-review-surface);
+  border-color: var(--color-accent);
+}
+
+.review-list strong,
+.review-upcoming strong {
+  display: block;
+}
+
+.review-list small,
+.review-upcoming small {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.review-action {
+  align-items: center;
+  color: var(--color-accent-ink);
+  display: inline-flex;
+  font-weight: 600;
+  gap: var(--space-2xs);
+  white-space: nowrap;
+}
+
+.review-when {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+.review-upcoming {
+  margin-block-start: var(--space-xl);
+}
+
+.review-upcoming h2 {
+  font-size: var(--text-base);
+  margin: 0 0 var(--space-sm);
+}

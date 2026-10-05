@@ -1,5 +1,8 @@
 /* Hallmark · macrostructure: Ecosystem Index · genre: playful · theme: studied-DNA (source: user reference images) · enrichment: none · nav: task bottom-navigation · footer: none · pre-emit critique: P5 H5 E5 S5 R5 V5 */
 @import "./tokens.css";
+/* Shared controls (.primary-action, .back-link, .dua-status, .dua-source, .reader-topline)
+   live in the reader sheet and are used by every page, so they load with the shell. */
+@import "./dua-library.css";
 
 html,
 body {

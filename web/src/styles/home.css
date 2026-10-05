@@ -340,3 +340,38 @@
     transition-duration: 0ms;
   }
 }
+
+.home-progress {
+  border-block-start: var(--rule-1) solid var(--color-rule);
+  margin-block-start: var(--space-page-section);
+  padding-block-start: var(--space-lg);
+}
+
+.home-progress h2 {
+  font-size: var(--text-base);
+  margin: 0 0 var(--space-md);
+}
+
+.home-progress dl {
+  display: grid;
+  gap: var(--space-sm);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 0 var(--space-sm);
+}
+
+.home-progress dt {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.home-progress dd {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  margin: var(--space-2xs) 0 0;
+}
+
+.home-progress > p {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin: 0;
+}

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { childLearningPath } from "../content/child-learning-path.js";
 import { fetchActiveDuaList, type PublicDuaListItem } from "../content/dua-api.js";
+import { statusOf } from "../content/progress.js";
+import { useProgress } from "./progress-provider.js";
 import { LearningIcon } from "./learning-icon.js";
 import "../styles/child-learning.css";
 
@@ -10,8 +12,11 @@ type LearningState =
   | { readonly status: "ready"; readonly itemsByExternalId: ReadonlyMap<string, PublicDuaListItem> }
   | { readonly status: "error" };
 
+const statusLabels = { baru: "Belum dimulai", belajar: "Sedang dihafal", hafal: "Sudah hafal" } as const;
+
 export function ChildLearningPage() {
   const [state, setState] = useState<LearningState>({ status: "loading" });
+  const { state: progress } = useProgress();
 
   useEffect(() => {
     let current = true;
@@ -63,15 +68,16 @@ export function ChildLearningPage() {
             <ol>
               {stage.steps.map((step, stepIndex) => {
                 const item = state.itemsByExternalId.get(step.externalId);
+                const status = item ? statusOf(progress, item.id) : "baru";
                 return item ? (
                   <li key={step.externalId}>
-                    <Link to={`/doa/${item.id}`}>
+                    <Link to={`/hafalan/${item.id}`}>
                       <span className="learning-step-number">{stepIndex + 1}</span>
                       <span>
-                        <small>{step.cue}</small>
+                        <small>{step.cue} · {statusLabels[status]}</small>
                         <strong>{item.title}</strong>
                       </span>
-                      <span className="learning-step-action"><span>Belajar</span><LearningIcon name="arrowRight" /></span>
+                      <span className="learning-step-action"><span>{status === "baru" ? "Belajar" : "Ulangi"}</span><LearningIcon name="arrowRight" /></span>
                     </Link>
                   </li>
                 ) : null;

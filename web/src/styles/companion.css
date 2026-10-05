@@ -1,0 +1,191 @@
+/* Hallmark · companion space: a parent's read-out, grouped by what they can act on */
+
+.companion {
+  margin-inline: auto;
+  max-inline-size: 42rem;
+  min-inline-size: 0;
+}
+
+.companion-heading h1 {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-lg), 6vw, var(--text-2xl));
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 var(--space-sm);
+}
+
+.companion-heading > p:last-child {
+  color: var(--color-muted);
+  margin-block: 0 var(--space-lg);
+}
+
+.companion-warning {
+  background: var(--color-practice-surface);
+  border-radius: var(--radius-md);
+  margin-block-end: var(--space-lg);
+  padding: var(--space-md);
+}
+
+.companion-summary,
+.companion-setting {
+  border-block-start: var(--rule-1) solid var(--color-rule);
+  margin-block-end: var(--space-lg);
+  padding-block-start: var(--space-lg);
+}
+
+.companion-summary h2,
+.companion-setting h2 {
+  font-size: var(--text-base);
+  margin: 0 0 var(--space-xs);
+}
+
+.companion-setting > p {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin-block: 0 var(--space-md);
+}
+
+.companion-summary dl {
+  display: grid;
+  gap: var(--space-sm);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0 0 var(--space-md);
+}
+
+.companion-summary dt {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.companion-summary dd {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  margin: var(--space-2xs) 0 0;
+}
+
+.companion-today {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.companion-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.companion-choice {
+  background: var(--color-control-surface);
+  border: var(--rule-1) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  color: var(--color-ink);
+  cursor: pointer;
+  font: inherit;
+  min-block-size: 3rem;
+  padding-inline: var(--space-md);
+}
+
+.companion-choice[aria-pressed="true"] {
+  background: var(--color-control-active);
+  border-color: var(--color-accent);
+  font-weight: 600;
+}
+
+.companion-choice.is-danger {
+  background: var(--color-home-rose);
+  border-color: var(--color-ink);
+}
+
+.companion-toggles {
+  display: grid;
+  gap: var(--space-sm);
+  list-style: none;
+  margin: var(--space-md) 0 0;
+  padding: 0;
+}
+
+.companion-toggle {
+  align-items: center;
+  background: var(--color-paper-raised);
+  border: var(--rule-1) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  gap: var(--space-md);
+  inline-size: 100%;
+  justify-content: space-between;
+  min-block-size: 4rem;
+  padding: var(--space-md);
+  text-align: start;
+}
+
+.companion-toggle strong {
+  display: block;
+}
+
+.companion-toggle small {
+  color: var(--color-muted);
+}
+
+.companion-toggle[aria-pressed="true"] {
+  background: var(--color-active-surface);
+  border-color: var(--color-accent);
+}
+
+.companion-toggle-state {
+  color: var(--color-accent-ink);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.companion-dua-list {
+  display: grid;
+  gap: var(--space-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.companion-dua-list li {
+  align-items: center;
+  border: var(--rule-1) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  display: flex;
+  gap: var(--space-md);
+  justify-content: space-between;
+  padding: var(--space-md);
+}
+
+.companion-dua-list strong {
+  display: block;
+}
+
+.companion-dua-list small {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.companion-remove {
+  background: none;
+  border: var(--rule-1) solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--text-sm);
+  min-block-size: 2.75rem;
+  padding-inline: var(--space-sm);
+  white-space: nowrap;
+}
+
+.companion-confirm {
+  background: var(--color-source-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.companion-confirm p {
+  margin-block: 0 var(--space-md);
+}

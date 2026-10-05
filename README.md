@@ -140,3 +140,49 @@ The read API under `/api/v1/*` serves the same bundle, so no read path touches
 Neon and `DATABASE_URL` is not required to run the deployment. Neon is only
 needed by the authoring commands (`doa:sync`, `doa:curate-apply`, `doa:chunks`,
 `doa:export`), which run from a developer machine.
+
+## MVP: belajar dan menghafal
+
+The app now covers one full loop a child and a companion can use daily.
+
+**Beranda** offers exactly one next thing — a review that is due, the next doa
+on the path, or the catalogue when the path is done — plus the day's count
+against the target. No competing calls to action.
+
+**Hafalan** (`/hafalan/:id`) is the memorisation round, built on the stored
+chunks:
+
+1. *Baca bersama* — the whole doa, read together
+2. *Potong* — one chunk at a time, each added only when the previous is fluent
+3. *Coba dari ingatan* — everything hidden, tap a chunk to peek
+4. The child answers "sudah lancar" or "belum lancar"; a round where most
+   chunks were peeked pre-selects "belum" so the honest answer is the easy one
+
+Chunks are offsets into the canonical Arabic, so a stage only decides how much
+of the stored text is shown. Nothing is rewritten.
+
+**Ulangi** (`/murajaah`) schedules by recall: 1, 2, 4, 7, 15, then 30 days.
+"Belum lancar" is never a penalty — it simply brings the doa back tomorrow.
+Three recalls in a row count as memorised.
+
+**Aku** (`/saya`) is the companion space: what the child has memorised, is
+learning, and owes today; the daily target; the default reading settings
+(Arabic size, Latin, translation); removing one doa's record; and a confirmed
+reset.
+
+### Privacy
+
+Progress lives in `localStorage` under one key, `hafalku.progress.v1`. There is
+no account and nothing leaves the device. If storage is unavailable, the app
+says so in the companion space and stays fully usable — only the record is lost
+when the tab closes.
+
+### Offline
+
+`web/public/sw.js` precaches the shell, the catalogue bundle, and the icon.
+Hashed build assets and the bundle are served cache-first; markup and code are
+network-first, so a new deploy is picked up as soon as there is a connection.
+With `manifest.webmanifest` the app installs to a phone home screen.
+
+The service worker only registers in a production build, so `npm run dev:web`
+is never served from a stale cache.

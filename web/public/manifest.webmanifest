@@ -1,0 +1,26 @@
+{
+  "name": "Hafalku Doa",
+  "short_name": "Hafalku",
+  "description": "Belajar dan menghafal doa harian bersama pendamping.",
+  "lang": "id",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f9f8f3",
+  "theme_color": "#f9f8f3",
+  "icons": [
+    {
+      "src": "/brand/doaku-logo.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/doaku-logo.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
