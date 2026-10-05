@@ -15,6 +15,7 @@ import {
 import { addDays, dayKey, describeDay, intervalFor, type RecallOutcome } from "../content/progress.js";
 import { LearningIcon } from "./learning-icon.js";
 import { useProgress } from "./progress-provider.js";
+import { ReaderControls } from "./reader-controls.js";
 import "../styles/memorize.css";
 
 type DetailState =
@@ -104,7 +105,10 @@ export function MemorizeSessionPage() {
         <p className="memorize-instruction">{guide.instruction}</p>
       </header>
 
-      <ol className={`memorize-chunks arabic-size-${settings.arabicSize}`} aria-label="Bagian doa">
+      <ol
+        aria-label="Bagian doa"
+        className={`memorize-chunks arabic-size-${settings.arabicSize}${settings.colorGuidance ? " has-color-guidance" : ""}`}
+      >
         {chunks.map((chunk, index) => {
           const visible = isChunkVisible(session, index);
           const arabic = dua.arabic.slice(chunk.arabicStart, chunk.arabicEnd);
@@ -116,7 +120,7 @@ export function MemorizeSessionPage() {
                 <span className="memorize-chunk-number" aria-hidden="true">{index + 1}</span>
                 <p className="memorize-arabic" lang="ar" dir="rtl">{arabic}</p>
                 {settings.latinVisible && chunk.latinSegment.length > 0 && (
-                  <p className="memorize-latin">{chunk.latinSegment}</p>
+                  <p className={`memorize-latin${settings.latinLarge ? " is-large" : ""}`}>{chunk.latinSegment}</p>
                 )}
               </li>
             );
@@ -149,7 +153,7 @@ export function MemorizeSessionPage() {
         })}
       </ol>
 
-      {session.stage === "baca" && settings.translationVisible && (
+      {settings.translationVisible && (
         <section className="memorize-translation" aria-labelledby="memorize-translation-title">
           <h2 id="memorize-translation-title">Arti</h2>
           <p>{dua.translation}</p>
@@ -177,6 +181,10 @@ export function MemorizeSessionPage() {
           <span>Mundur</span>
         </button>
       </div>
+
+      <section className="reader-actions" aria-label="Pengaturan belajar">
+        <ReaderControls compact />
+      </section>
 
       <details className="dua-source">
         <summary>Sumber doa</summary>

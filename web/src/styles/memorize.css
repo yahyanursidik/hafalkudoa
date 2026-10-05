@@ -225,3 +225,22 @@
   gap: var(--space-2xs);
   min-block-size: 4.5rem;
 }
+
+.memorize-latin.is-large {
+  color: var(--color-ink);
+  font-size: var(--text-lg);
+}
+
+.memorize-chunks.has-color-guidance .memorize-arabic {
+  background: var(--color-practice-surface);
+  border-radius: var(--radius-sm);
+  padding-inline: var(--space-2xs);
+}
+
+.memorize-chunks.has-color-guidance .memorize-latin {
+  color: var(--color-accent-ink);
+}
+
+.memorize .reader-actions {
+  margin-block-end: var(--space-lg);
+}

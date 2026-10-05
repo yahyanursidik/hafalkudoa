@@ -165,6 +165,12 @@ of the stored text is shown. Nothing is rewritten.
 "Belum lancar" is never a penalty — it simply brings the doa back tomorrow.
 Three recalls in a row count as memorised.
 
+**Reading aids** (Arabic size, Latin, large Latin, meaning, colour guidance,
+focus mode) are one shared control grid on both the reader and the round, and
+they write straight to the saved settings. A child who needs larger Arabic sets
+it once and it holds for the next doa and the next day. Latin placement is
+reader-only, since a round shows one chunk at a time.
+
 **Aku** (`/saya`) is the companion space: what the child has memorised, is
 learning, and owes today; the daily target; the default reading settings
 (Arabic size, Latin, translation); removing one doa's record; and a confirmed
