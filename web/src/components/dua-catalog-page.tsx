@@ -23,6 +23,7 @@ export function DuaCatalogPage() {
   const [state, setState] = useState<CatalogState>({ status: "loading" });
   const [page, setPage] = useState(0);
   const [audience, setAudience] = useState<AudienceFilter>("KIDS");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     let current = true;
@@ -81,8 +82,12 @@ export function DuaCatalogPage() {
     );
   }
 
-  const totalPages = duaPageCount(state.items.length);
-  const visibleItems = paginateDua(state.items, page);
+  const query = search.trim().toLocaleLowerCase("id");
+  const matchedItems = state.items.filter((dua) =>
+    [dua.title, dua.group, dua.curation?.chapter, ...dua.tags].some((text) => text?.toLocaleLowerCase("id").includes(query)),
+  );
+  const totalPages = duaPageCount(matchedItems.length);
+  const visibleItems = paginateDua(matchedItems, page);
 
   return (
     <section className="dua-library" aria-labelledby="dua-library-title">
@@ -93,6 +98,27 @@ export function DuaCatalogPage() {
       </header>
 
       {filters}
+
+      <div className="dua-search">
+        <label htmlFor="dua-search">Mau baca doa apa?</label>
+        <input
+          id="dua-search"
+          type="search"
+          placeholder="Coba ketik: makan, tidur, belajar…"
+          value={search}
+          onChange={(event) => { setSearch(event.target.value); setPage(0); }}
+          aria-describedby="dua-search-results"
+        />
+        <p id="dua-search-results" role="status">{query ? `${matchedItems.length} doa ditemukan` : "Pilih satu doa untuk mulai membaca."}</p>
+      </div>
+
+      {matchedItems.length === 0 && (
+        <div className="dua-status">
+          <h2>Doanya belum ketemu.</h2>
+          <p>Coba kata yang lebih pendek, atau pilih kelompok doa lain.</p>
+          <button className="primary-action" type="button" onClick={() => { setSearch(""); setPage(0); }}>Lihat semua</button>
+        </div>
+      )}
 
       <ol className="dua-list" start={page * 12 + 1}>
         {visibleItems.map((dua) => (
@@ -114,15 +140,15 @@ export function DuaCatalogPage() {
         ))}
       </ol>
 
-      <nav className="dua-pagination" aria-label="Halaman daftar doa">
+      {matchedItems.length > 0 && <nav className="dua-pagination" aria-label="Halaman daftar doa">
         <button aria-label="Halaman sebelumnya" disabled={page === 0} onClick={() => setPage((current) => current - 1)} type="button">
-          <LearningIcon name="arrowLeft" /><span>Sebelumnya</span>
+          <LearningIcon name="arrowLeft" /><span>Kembali</span>
         </button>
         <p aria-live="polite">Halaman {page + 1} dari {totalPages}</p>
         <button aria-label="Halaman berikutnya" disabled={page >= totalPages - 1} onClick={() => setPage((current) => current + 1)} type="button">
-          <span>Berikutnya</span><LearningIcon name="arrowRight" />
+          <span>Lanjut</span><LearningIcon name="arrowRight" />
         </button>
-      </nav>
+      </nav>}
     </section>
   );
 }

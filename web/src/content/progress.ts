@@ -57,7 +57,7 @@ export const defaultSettings: AppSettings = {
   arabicSize: "medium",
   latinVisible: true,
   latinFirst: false,
-  latinLarge: false,
+  latinLarge: true,
   translationVisible: false,
   colorGuidance: false,
   dailyTarget: 1,
