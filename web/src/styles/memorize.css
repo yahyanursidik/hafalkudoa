@@ -228,7 +228,10 @@
 
 .memorize-latin.is-large {
   color: var(--color-ink);
-  font-size: var(--text-lg);
+  font-size: clamp(1.4rem, 5vw, 1.75rem);
+  font-weight: 650;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
 }
 
 .memorize-chunks.has-color-guidance .memorize-arabic {

@@ -3,10 +3,13 @@
 .dua-library,
 .dua-detail,
 .dua-status {
+  box-sizing: border-box;
   margin-inline: auto;
   max-inline-size: 48rem;
   min-inline-size: 0;
 }
+
+.dua-library { inline-size: 100%; }
 
 .dua-library-heading h1,
 .dua-detail h1,
@@ -336,7 +339,7 @@
 }
 
 .reader-control strong,
-.reader-control-detail { white-space: nowrap; }
+.reader-control-detail { white-space: normal; }
 
 .reader-control[aria-pressed="true"] {
   background: var(--color-control-active);
@@ -431,7 +434,127 @@
 }
 
 .reader-practice {
+  box-sizing: border-box;
   justify-content: center;
   margin-block-end: var(--space-md);
   inline-size: 100%;
+}
+
+/* Hallmark · reading controls: grouped tools · brand teal, sky and warm yellow
+ * pre-emit critique: P4 H5 E4 S5 R5 V4 */
+.reader-stage {
+  border-radius: var(--radius-lg);
+  padding-inline: var(--space-md);
+}
+
+.reader-latin.is-large p {
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.reader-controls {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.reader-control-group {
+  border: 0;
+  margin: 0;
+  min-inline-size: 0;
+  padding: 0;
+}
+
+.reader-control-group legend {
+  color: var(--color-muted);
+  font-weight: 700;
+  padding: 0 0 var(--space-sm);
+}
+
+.reader-size-grid {
+  display: grid;
+  gap: var(--space-xs);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.reader-size-grid .reader-control-heading {
+  flex-direction: column;
+  align-items: start;
+  gap: var(--space-2xs);
+}
+
+.reader-size-grid .reader-control strong,
+.reader-size-grid .reader-control-detail {
+  font-size: var(--text-xs);
+}
+
+.reader-control-group:first-child .reader-control {
+  background: var(--color-help-surface);
+  color: var(--color-help-ink);
+}
+
+.reader-control-group:first-child .reader-control[aria-pressed="true"] {
+  background: var(--color-help-active);
+  border-color: var(--color-help-ink);
+}
+
+.reader-size-grid .reader-control {
+  background: var(--color-practice-surface);
+  color: var(--color-practice-ink);
+}
+
+.reader-size-grid .reader-control[aria-pressed="true"] {
+  background: var(--color-practice-active);
+  border-color: var(--color-practice-ink);
+}
+
+.reader-control-heading {
+  align-items: start;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+.reader-control strong { font-size: var(--text-sm); }
+.reader-control[aria-pressed="true"] strong::after { content: " ✓"; }
+
+.dua-search {
+  display: grid;
+  gap: var(--space-xs);
+  margin-block-end: var(--space-lg);
+}
+
+.dua-search label { font-weight: 750; }
+
+.dua-search input {
+  background: var(--color-paper-raised);
+  border: var(--rule-1) solid var(--color-rule);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+  color: var(--color-ink);
+  font: inherit;
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 3.25rem;
+  padding-inline: var(--space-md);
+}
+
+.dua-search input::placeholder { color: var(--color-muted); }
+.dua-search p { color: var(--color-muted); font-size: var(--text-sm); margin: 0; }
+.dua-list { list-style: none; }
+.dua-list a { padding-inline: var(--space-md); }
+.dua-list a > span:first-child { min-inline-size: 0; overflow-wrap: anywhere; }
+.dua-list-action { flex-shrink: 0; }
+.dua-pagination button { font-size: var(--text-sm); padding-inline: var(--space-xs); }
+.dua-list li:nth-child(even) a { background: var(--color-help-surface); }
+.dua-filter { white-space: nowrap; }
+
+@media (hover: hover) and (pointer: fine) {
+  .dua-search input:hover { background: var(--color-reading-surface); }
+  .dua-list li a:hover { background: var(--color-review-surface); }
+  .dua-filter:hover { background: var(--color-help-surface); color: var(--color-help-ink); }
+}
+
+@media (min-width: 40rem) {
+  .reader-control-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .reader-control-heading { align-items: center; flex-direction: row; }
+  .reader-size-grid .reader-control-heading { flex-direction: row; gap: var(--space-xs); }
+  .reader-size-grid .reader-control strong { font-size: var(--text-base); }
 }

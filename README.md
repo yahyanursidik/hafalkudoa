@@ -166,10 +166,14 @@ of the stored text is shown. Nothing is rewritten.
 Three recalls in a row count as memorised.
 
 **Reading aids** (Arabic size, Latin, large Latin, meaning, colour guidance,
-focus mode) are one shared control grid on both the reader and the round, and
+focus mode) are shared, grouped controls on both the reader and the round, and
 they write straight to the saved settings. A child who needs larger Arabic sets
 it once and it holds for the next doa and the next day. Latin placement is
 reader-only, since a round shows one chunk at a time.
+
+New readers start with visible, large Latin. Existing reading preferences remain
+unchanged. The catalogue includes a search for titles, groups, curated chapters,
+and tags within the selected audience.
 
 **Aku** (`/saya`) is the companion space: what the child has memorised, is
 learning, and owes today; the daily target; the default reading settings
@@ -192,3 +196,10 @@ With `manifest.webmanifest` the app installs to a phone home screen.
 
 The service worker only registers in a production build, so `npm run dev:web`
 is never served from a stale cache.
+
+## Releases and versioning
+
+Current version: **0.2.0**. See [CHANGELOG.md](CHANGELOG.md) for release notes,
+verification results, and the versioning policy. The package and lockfile versions
+must match. Releases use annotated Git tags such as `v0.2.0` on the merged main
+branch, with the same notes available in the GitHub release.

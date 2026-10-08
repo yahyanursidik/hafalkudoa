@@ -40,65 +40,75 @@ export function ReaderControls({ compact = false }: ReaderControlsProps) {
   const set = (patch: Partial<AppSettings>) => changeSettings(patch);
 
   return (
-    <div className="reader-control-grid">
-      {!compact && (
-        <ReaderControl
-          detail={settings.latinFirst ? "Di atas Arab" : "Di bawah Arab"}
-          icon="order"
-          isPressed={settings.latinFirst}
-          label="Letak Latin"
-          onClick={() => set({ latinFirst: !settings.latinFirst, latinVisible: true })}
-        />
-      )}
-      <ReaderControl
-        detail={settings.latinVisible ? "Bantuan terlihat" : "Bantuan baca"}
-        icon="help"
-        isPressed={settings.latinVisible}
-        label="Latin"
-        onClick={() => set({ latinVisible: !settings.latinVisible })}
-      />
-      <ReaderControl
-        detail={settings.latinLarge ? "Sudah besar" : "Mudah dibaca"}
-        icon="textLarge"
-        isPressed={settings.latinLarge}
-        label="Latin besar"
-        onClick={() => set({ latinLarge: !settings.latinLarge, latinVisible: true })}
-      />
-      <ReaderControl
-        detail={settings.translationVisible ? "Arti terlihat" : "Arti Indonesia"}
-        icon="help"
-        isPressed={settings.translationVisible}
-        label="Lihat arti"
-        onClick={() => set({ translationVisible: !settings.translationVisible })}
-      />
-      <ReaderControl
-        detail={settings.colorGuidance ? "Warna aktif" : "Tandai teks"}
-        icon="color"
-        isPressed={settings.colorGuidance}
-        label="Warna bantu"
-        onClick={() => set({ colorGuidance: !settings.colorGuidance, latinVisible: true })}
-      />
-      <ReaderControl
-        detail="Ukuran kecil"
-        icon="textSmall"
-        isPressed={settings.arabicSize === "small"}
-        label="Arab kecil"
-        onClick={() => set({ arabicSize: "small" })}
-      />
-      <ReaderControl
-        detail="Ukuran nyaman"
-        icon="textMedium"
-        isPressed={settings.arabicSize === "medium"}
-        label="Arab sedang"
-        onClick={() => set({ arabicSize: "medium" })}
-      />
-      <ReaderControl
-        detail="Mudah dilihat"
-        icon="textLarge"
-        isPressed={settings.arabicSize === "large"}
-        label="Arab besar"
-        onClick={() => set({ arabicSize: "large" })}
-      />
+    <div className="reader-controls">
+      <fieldset className="reader-control-group">
+        <legend>Bantuan membaca</legend>
+        <div className="reader-control-grid">
+          {!compact && (
+            <ReaderControl
+              detail={settings.latinFirst ? "Di atas Arab" : "Di bawah Arab"}
+              icon="order"
+              isPressed={settings.latinFirst}
+              label="Letak Latin"
+              onClick={() => set({ latinFirst: !settings.latinFirst, latinVisible: true })}
+            />
+          )}
+          <ReaderControl
+            detail={settings.latinVisible ? "Bantuan terlihat" : "Bantuan baca"}
+            icon="help"
+            isPressed={settings.latinVisible}
+            label="Latin"
+            onClick={() => set({ latinVisible: !settings.latinVisible })}
+          />
+          <ReaderControl
+            detail={settings.latinLarge ? "Sudah besar" : "Mudah dibaca"}
+            icon="textLarge"
+            isPressed={settings.latinLarge}
+            label="Latin besar"
+            onClick={() => set({ latinLarge: !settings.latinLarge, latinVisible: true })}
+          />
+          <ReaderControl
+            detail={settings.translationVisible ? "Arti terlihat" : "Arti Indonesia"}
+            icon="help"
+            isPressed={settings.translationVisible}
+            label="Lihat arti"
+            onClick={() => set({ translationVisible: !settings.translationVisible })}
+          />
+          <ReaderControl
+            detail={settings.colorGuidance ? "Warna aktif" : "Tandai teks"}
+            icon="color"
+            isPressed={settings.colorGuidance}
+            label="Warna bantu"
+            onClick={() => set({ colorGuidance: !settings.colorGuidance, latinVisible: true })}
+          />
+        </div>
+      </fieldset>
+      <fieldset className="reader-control-group">
+        <legend>Ukuran tulisan Arab</legend>
+        <div className="reader-size-grid">
+          <ReaderControl
+            detail="Ringkas"
+            icon="textSmall"
+            isPressed={settings.arabicSize === "small"}
+            label="Kecil"
+            onClick={() => set({ arabicSize: "small" })}
+          />
+          <ReaderControl
+            detail="Nyaman"
+            icon="textMedium"
+            isPressed={settings.arabicSize === "medium"}
+            label="Sedang"
+            onClick={() => set({ arabicSize: "medium" })}
+          />
+          <ReaderControl
+            detail="Lebih jelas"
+            icon="textLarge"
+            isPressed={settings.arabicSize === "large"}
+            label="Besar"
+            onClick={() => set({ arabicSize: "large" })}
+          />
+        </div>
+      </fieldset>
       <ReaderControl
         detail={isFocusMode ? "Kembali ke menu" : "Sembunyikan menu"}
         icon="focus"

@@ -108,6 +108,20 @@ describe("storage", () => {
     };
   }
 
+  it("starts with large visible Latin for a new reader", () => {
+    expect(readProgress(memoryStorage()).settings).toMatchObject({
+      latinVisible: true,
+      latinLarge: true,
+    });
+  });
+
+  it("preserves a saved smaller-Latin preference and learning progress", () => {
+    const state = updateSettings(practise(defaultProgressState(), 2), { latinLarge: false });
+    const storage = memoryStorage();
+    expect(writeProgress(storage, state)).toBe(true);
+    expect(readProgress(storage)).toEqual(state);
+  });
+
   it("round-trips a state", () => {
     const storage = memoryStorage();
     const state = practise(defaultProgressState(), 2);

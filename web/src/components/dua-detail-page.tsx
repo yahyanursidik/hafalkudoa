@@ -117,7 +117,7 @@ export function DuaDetailPage() {
       </section>
 
       <details className="dua-source" open>
-        <summary>Sumber doa</summary>
+        <summary>Sumber doa · untuk pendamping</summary>
         <p>{dua.source}</p>
       </details>
     </article>

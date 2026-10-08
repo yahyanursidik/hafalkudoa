@@ -227,6 +227,16 @@ a {
   color: var(--color-accent-ink);
 }
 
+.navigation-link.is-active span {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: var(--space-2xs);
+}
+
+.navigation-link:nth-child(2).is-active { background: var(--color-practice-surface); color: var(--color-practice-ink); }
+.navigation-link:nth-child(3).is-active { background: var(--color-review-surface); color: var(--color-review-ink); }
+.navigation-link:nth-child(4).is-active { background: var(--color-help-surface); color: var(--color-help-ink); }
+
 .navigation-link:active {
   background: var(--color-review-surface);
   transform: translateY(1px);
